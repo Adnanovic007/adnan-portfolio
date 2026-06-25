@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adnan – Logistikexperte</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --gold: #c9a84c;
+    --gold-light: #e8d5a3;
+    --dark: #0d0d0d;
+    --dark2: #141414;
+    --dark3: #1c1c1c;
+    --dark4: #252525;
+    --text: #f0ece4;
+    --text-muted: #9a9589;
+    --border: rgba(201,168,76,0.2);
+  }
+  body {
+    background: var(--dark);
+    color: var(--text);
+    font-family: 'Georgia', serif;
+    line-height: 1.7;
+  }
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(13,13,13,0.95);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 60px; height: 64px;
+    backdrop-filter: blur(10px);
+  }
+  .nav-logo {
+    font-size: 18px; font-weight: 400; letter-spacing: 0.15em;
+    color: var(--gold); text-transform: uppercase;
+  }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    color: var(--text-muted); text-decoration: none;
+    font-family: 'Arial', sans-serif; font-size: 13px; letter-spacing: 0.1em;
+    text-transform: uppercase; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  section { padding: 100px 60px; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh; display: flex; flex-direction: column;
+    justify-content: center; padding-top: 140px;
+    border-bottom: 1px solid var(--border);
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(201,168,76,0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-label {
+    font-family: 'Arial', sans-serif; font-size: 12px;
+    letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 24px;
+  }
+  .hero-name {
+    font-size: clamp(52px, 8vw, 96px); font-weight: 400;
+    line-height: 1.05; letter-spacing: -0.02em;
+    color: var(--text); margin-bottom: 8px;
+  }
+  .hero-title {
+    font-size: clamp(20px, 3vw, 32px); font-weight: 400;
+    color: var(--gold); letter-spacing: 0.05em;
+    margin-bottom: 32px;
+  }
+  .hero-desc {
+    font-family: 'Arial', sans-serif; font-size: 16px;
+    color: var(--text-muted); max-width: 520px; line-height: 1.8;
+    margin-bottom: 48px;
+  }
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 12px;
+    border: 1px solid var(--gold); color: var(--gold);
+    font-family: 'Arial', sans-serif; font-size: 13px;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    padding: 14px 32px; text-decoration: none;
+    transition: background 0.2s, color 0.2s; cursor: pointer;
+  }
+  .hero-cta:hover { background: var(--gold); color: var(--dark); }
+  .hero-line {
+    position: absolute; bottom: 60px; left: 60px;
+    display: flex; align-items: center; gap: 16px;
+    font-family: 'Arial', sans-serif; font-size: 12px;
+    color: var(--text-muted); letter-spacing: 0.1em;
+  }
+  .hero-line::before {
+    content: ''; display: block; width: 48px; height: 1px; background: var(--text-muted);
+  }
+
+  /* STATS */
+  .stats {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: var(--border);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 0;
+  }
+  .stat {
+    background: var(--dark); padding: 48px 60px; text-align: center;
+  }
+  .stat-num {
+    font-size: 56px; font-weight: 400; color: var(--gold); line-height: 1;
+    margin-bottom: 8px;
+  }
+  .stat-label {
+    font-family: 'Arial', sans-serif; font-size: 12px;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted);
+  }
+
+  /* ABOUT */
+  .about { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .about-heading {
+    font-size: 13px; font-family: 'Arial', sans-serif;
+    letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold);
+    margin-bottom: 20px;
+  }
+  .about-title { font-size: 36px; font-weight: 400; line-height: 1.2; margin-bottom: 28px; }
+  .about-text {
+    font-family: 'Arial', sans-serif; font-size: 15px;
+    color: var(--text-muted); line-height: 1.9; margin-bottom: 20px;
+  }
+
+  /* EXPERTISE */
+  .expertise-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px;
+    background: var(--border); border: 1px solid var(--border);
+    margin-top: 16px;
+  }
+  .expertise-item {
+    background: var(--dark2); padding: 28px 32px;
+  }
+  .expertise-icon {
+    width: 36px; height: 36px; border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold); font-size: 16px; margin-bottom: 16px;
+  }
+  .expertise-name {
+    font-family: 'Arial', sans-serif; font-size: 14px;
+    font-weight: 500; margin-bottom: 6px;
+  }
+  .expertise-desc {
+    font-family: 'Arial', sans-serif; font-size: 13px;
+    color: var(--text-muted); line-height: 1.6;
+  }
+
+  /* PROJECTS */
+  .projects-header {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    margin-bottom: 48px;
+  }
+  .section-heading {
+    font-size: 13px; font-family: 'Arial', sans-serif;
+    letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px;
+  }
+  .section-title { font-size: 40px; font-weight: 400; }
+  .projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); }
+  .project-card {
+    background: var(--dark2); padding: 40px;
+    transition: background 0.2s;
+  }
+  .project-card:hover { background: var(--dark3); }
+  .project-num {
+    font-family: 'Arial', sans-serif; font-size: 11px;
+    color: var(--gold); letter-spacing: 0.3em; margin-bottom: 24px;
+    opacity: 0.7;
+  }
+  .project-title { font-size: 22px; margin-bottom: 12px; }
+  .project-desc {
+    font-family: 'Arial', sans-serif; font-size: 14px;
+    color: var(--text-muted); line-height: 1.8; margin-bottom: 24px;
+  }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag {
+    font-family: 'Arial', sans-serif; font-size: 11px;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    padding: 5px 12px; border: 1px solid var(--border); color: var(--text-muted);
+  }
+
+  /* CONTACT */
+  .contact { background: var(--dark2); text-align: center; }
+  .contact-title { font-size: 48px; margin-bottom: 16px; }
+  .contact-sub {
+    font-family: 'Arial', sans-serif; font-size: 16px;
+    color: var(--text-muted); margin-bottom: 48px;
+  }
+  .contact-links { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; }
+  .contact-link {
+    display: flex; align-items: center; gap: 10px;
+    border: 1px solid var(--border); padding: 14px 28px;
+    color: var(--text-muted); text-decoration: none;
+    font-family: 'Arial', sans-serif; font-size: 13px;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .contact-link:hover { border-color: var(--gold); color: var(--gold); }
+
+  footer {
+    border-top: 1px solid var(--border); padding: 24px 60px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-copy {
+    font-family: 'Arial', sans-serif; font-size: 12px;
+    color: var(--text-muted); letter-spacing: 0.1em;
+  }
+
+  .divider { height: 1px; background: var(--border); }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 20px; }
+    .nav-links { gap: 16px; }
+    section { padding: 60px 20px; }
+    .hero { padding-top: 100px; }
+    .hero-line { left: 20px; }
+    .stats { grid-template-columns: 1fr; }
+    .stat { padding: 32px 20px; }
+    .about { grid-template-columns: 1fr; gap: 48px; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .expertise-grid { grid-template-columns: 1fr; }
+    footer { padding: 24px 20px; flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Adnan</div>
+  <ul class="nav-links">
+    <li><a href="#about">Über mich</a></li>
+    <li><a href="#projekte">Projekte</a></li>
+    <li><a href="#kontakt">Kontakt</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="home">
+  <div class="hero-label">Logistik & Supply Chain</div>
+  <h1 class="hero-name">Adnan</h1>
+  <div class="hero-title">Logistikexperte</div>
+  <p class="hero-desc">
+    Erfahrener Spezialist für Supply-Chain-Management, Prozessoptimierung und internationale Logistiklösungen. Effizienz trifft Präzision.
+  </p>
+  <a class="hero-cta" href="#kontakt">Kontakt aufnehmen →</a>
+  <div class="hero-line">Berlin, Deutschland</div>
+</section>
+
+<div class="stats">
+  <div class="stat">
+    <div class="stat-num">10+</div>
+    <div class="stat-label">Jahre Erfahrung</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">50+</div>
+    <div class="stat-label">Abgeschlossene Projekte</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">15+</div>
+    <div class="stat-label">Länder & Märkte</div>
+  </div>
+</div>
+
+<section id="about">
+  <div class="about">
+    <div>
+      <div class="about-heading">Über mich</div>
+      <h2 class="about-title">Präzision in jeder Lieferkette</h2>
+      <p class="about-text">
+        Mit umfangreicher Erfahrung in der internationalen Logistik bringe ich strategisches Denken und operative Exzellenz zusammen. Mein Fokus liegt auf der Optimierung von Lieferketten und der Entwicklung nachhaltiger Logistiklösungen.
+      </p>
+      <p class="about-text">
+        Ob Beschaffungslogistik, Lageroptimierung oder internationale Spedition – ich entwickle maßgeschneiderte Konzepte für komplexe Anforderungen.
+      </p>
+    </div>
+    <div>
+      <div class="about-heading">Kompetenzen</div>
+      <div class="expertise-grid">
+        <div class="expertise-item">
+          <div class="expertise-icon">◈</div>
+          <div class="expertise-name">Supply Chain</div>
+          <div class="expertise-desc">End-to-End Steuerung globaler Lieferketten</div>
+        </div>
+        <div class="expertise-item">
+          <div class="expertise-icon">◉</div>
+          <div class="expertise-name">Prozessoptimierung</div>
+          <div class="expertise-desc">Lean-Management & Effizienzsteigerung</div>
+        </div>
+        <div class="expertise-item">
+          <div class="expertise-icon">◆</div>
+          <div class="expertise-name">Lagermanagement</div>
+          <div class="expertise-desc">WMS-Systeme & Bestandsoptimierung</div>
+        </div>
+        <div class="expertise-item">
+          <div class="expertise-icon">◇</div>
+          <div class="expertise-name">Internationale Spedition</div>
+          <div class="expertise-desc">Zollabwicklung & multimodaler Transport</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="projekte">
+  <div class="projects-header">
+    <div>
+      <div class="section-heading">Ausgewählte Projekte</div>
+      <h2 class="section-title">Referenzen</h2>
+    </div>
+  </div>
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-num">01 — 2023</div>
+      <h3 class="project-title">Lageroptimierung Mitteleuropa</h3>
+      <p class="project-desc">Neustrukturierung eines Distributionszentrums mit 18.000 m² – Durchlaufzeiten um 35% reduziert und Fehlerquote halbiert.</p>
+      <div class="project-tags">
+        <span class="tag">Lean Management</span>
+        <span class="tag">WMS</span>
+        <span class="tag">KPI-Analyse</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-num">02 — 2022</div>
+      <h3 class="project-title">Supply Chain Restrukturierung</h3>
+      <p class="project-desc">Aufbau einer resilienten Lieferkette für einen Industriekunden mit Lieferanten in 8 Ländern – Liefertreue von 72% auf 96% gesteigert.</p>
+      <div class="project-tags">
+        <span class="tag">Risikomanagement</span>
+        <span class="tag">Lieferantenmanagement</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-num">03 — 2021</div>
+      <h3 class="project-title">Digitalisierung Transportsteuerung</h3>
+      <p class="project-desc">Einführung eines TMS für ein mittelständisches Logistikunternehmen – vollständige Echtzeit-Transparenz im Fuhrpark mit 120 Fahrzeugen.</p>
+      <div class="project-tags">
+        <span class="tag">TMS</span>
+        <span class="tag">Digitalisierung</span>
+        <span class="tag">Flottenmanagement</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-num">04 — 2020</div>
+      <h3 class="project-title">Internationale Zollprozesse</h3>
+      <p class="project-desc">Harmonisierung der Zollabwicklung für einen E-Commerce-Händler in 12 EU-Ländern – Abfertigungszeiten um 60% verkürzt.</p>
+      <div class="project-tags">
+        <span class="tag">Zollrecht</span>
+        <span class="tag">E-Commerce</span>
+        <span class="tag">EU-Regularien</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="kontakt">
+  <div class="section-heading">Kontakt</div>
+  <h2 class="contact-title">Zusammenarbeiten?</h2>
+  <p class="contact-sub">Ich freue mich auf Ihre Anfrage – ob Beratungsprojekt, Festanstellung oder Vortrag.</p>
+  <div class="contact-links">
+    <a class="contact-link" href="mailto:adnan@example.com">✉ E-Mail schreiben</a>
+    <a class="contact-link" href="https://linkedin.com">in LinkedIn</a>
+    <a class="contact-link" href="tel:+4930000000">☏ Anrufen</a>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-copy">© 2026 Adnan – Logistikexperte</span>
+  <span class="footer-copy" style="color: var(--gold);">Berlin, Deutschland</span>
+</footer>
+
+</body>
+</html>
